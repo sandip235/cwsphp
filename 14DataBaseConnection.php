@@ -1,6 +1,6 @@
 <?php
 
-echo "Lec's connect with database";
+echo "Let's connect with database";
 
 // To connect with database
 $servername="localhost";
