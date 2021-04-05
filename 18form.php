@@ -74,7 +74,7 @@
 
   if($con)
   {
-    echo "connection is success";
+    echo "<br> Database connection is success";
   }
   else
   {
@@ -82,17 +82,17 @@
   }
 
   /// Submit data to sql and Execute Query
-  $sql="INSERT INTO `f_tb1` (`name`, `email`, `dsc`,`dt`) VALUES ('$name', '$email', '$desc', current_timestamp());"
-  $result= var_dump(mysqli_query($con,$sql));
+  $sql="INSERT INTO `f_tb1` (`name`, `email`, `dsc`,`dt`) VALUES ('$name', '$email', '$desc', current_timestamp())";
+  $result=mysqli_query($con,$sql);
 
   //success msg if inserted
   if($result)
   {
-      echo "success";
+      echo "<br>Data inserted success";
   }
   else
   {
-    echo "not success";
+    echo "<br> not success";
   }
 
 
