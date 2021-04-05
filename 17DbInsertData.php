@@ -21,9 +21,15 @@ else
 }
 
 
+
+//taking variable data to insert... collect from form
+$id=4;
+$nam="4thInsert";
+
+
 // Insert data into Data Table
 
-$sql ="INSERT INTO `my_tb1` (`no`, `name`) VALUES ('3', '3rdInsert');";
+$sql ="INSERT INTO `my_tb1` (`id`, `name`) VALUES ('$id', '$nam');";
 $result=mysqli_query($conn,$sql);
 
 // Check that data inserted or not ?
