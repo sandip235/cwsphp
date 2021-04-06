@@ -59,10 +59,15 @@ if($num>0)
 echo "By While Loop <br>";
 
 // We can fetch in a better way using the while loop
-while($row = mysqli_fetch_assoc($result)){
+while($row = mysqli_fetch_assoc($result))
+{
     // echo var_dump($row);
     echo $row['id'] .  ". Hello ". $row['name'] ." Welcome to ". $row['email'].$row['dsc'].$row['dt'];
     echo "<br>";
 }
+
+
+
+
 
 ?>
