@@ -23,5 +23,11 @@ echo "     Hello....how are you ?   ";
 echo "<pre>";
 
 echo ltrim("   skfksfks      ");
-echo rtrim("   skfksfks      ");
+echo r
+
+
+
+
+
+trim("   skfksfks      ");
 ?>
