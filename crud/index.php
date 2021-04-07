@@ -4,11 +4,14 @@ $username="root";
 $password="";
 $database="dbnotes";
 
+$insert=false;
+
 //establish connection
 $conn=mysqli_connect($servername,$username,$password,$database);
 if($conn)
 {
-    echo "<br>connection established success";
+   // echo "<br>connection established success";
+   //will show error if any error occure 
 }
 else
 {
@@ -27,7 +30,8 @@ $result=mysqli_query($conn,$sql);
 
 if($result)
 {
-    echo "<br>inserted success";
+    // echo "<br>inserted success";
+    $insert=true;
 }
 else
 {
@@ -49,6 +53,10 @@ else
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css.css">
+        
+        <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
     <title>i-Notes: Made Easy</title>
 </head>
@@ -84,6 +92,24 @@ else
         </div>
     </nav>
 
+    <?php
+    if($insert==true)
+    {
+            echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            <strong>Success!</strong> Your note has been inserted successfully
+           
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+              <span aria-hidden='true'>×</span>
+            </button>
+          </div>";
+          
+    }
+
+
+    ?>
+
+
+
     <div class="container my-4">
         <h2>Add Note</h2>
         <form action="/cwsphp/crud/index.php" method="post">
@@ -94,7 +120,7 @@ else
 
             <div class="mb-3">
                 <label for="desc" class="form-label">Note Description</label>
-                <textarea  type="text" class="form-control" id="desc" name="desc" style="height: 100px"></textarea>
+                <textarea type="text" class="form-control" id="desc" name="desc" style="height: 100px"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Add Note</button>
@@ -137,7 +163,7 @@ else
 
     ?>
 
-                
+
 
             </tbody>
         </table>
