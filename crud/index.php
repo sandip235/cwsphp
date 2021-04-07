@@ -2,7 +2,7 @@
 $servername="localhost";
 $username="root";
 $password="";
-$database="notes";
+$database="dbnotes";
 
 //establish connection
 $conn=mysqli_connect($servername,$username,$password,$database);
@@ -13,6 +13,27 @@ if($conn)
 else
 {
     echo "<br>connection failed...! Try Again";
+}
+
+
+if($_SERVER['REQUEST_METHOD']=="POST")
+{
+    $title=$_POST["title"];
+    $desc=$_POST["desc"];
+
+
+$sql="INSERT INTO `note_master` (`title`, `dsc`) VALUES ('$title', '$desc')";
+$result=mysqli_query($conn,$sql);
+
+if($result)
+{
+    echo "<br>inserted success";
+}
+else
+{
+    echo "<br>not success".mysqli_error($conn);
+}
+
 }
 
 ?>
@@ -62,58 +83,73 @@ else
             </div>
         </div>
     </nav>
-    
+
     <div class="container my-4">
         <h2>Add Note</h2>
-        <form>
+        <form action="/cwsphp/crud/index.php" method="post">
             <div class="mb-3">
-              <label for="title" class="form-label">Note Title</label>
-              <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+                <label for="title" class="form-label">Note Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
             </div>
 
             <div class="mb-3">
                 <label for="desc" class="form-label">Note Description</label>
-                <textarea class="form-control" placeholder="Write Description" id="desc" name="desc" style="height: 100px"></textarea>
-              </div>
-
-
-            <!-- <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+                <textarea  type="text" class="form-control" id="desc" name="desc" style="height: 100px"></textarea>
             </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> -->
 
             <button type="submit" class="btn btn-primary">Add Note</button>
-          </form>
+        </form>
 
-    </div>
 
-    <?php
+
+
+        <!-- Creating Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sr No`</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
     $sql="SELECT * FROM `note_master`";
     $result=mysqli_query($conn,$sql);
 
-    if($result)
-    {
-        echo "<br>query excuted successfully...";
-    }
-    else
+    if(!$result)
     {
         echo "<br>Problem in query...!".mysqli_connect_error();
     }
 
-
+    while($row=mysqli_fetch_assoc($result))
+    {
+        echo "<tr>
+        <th scope='row'>".$row['sno']."</th>
+        <td>".$row['title']."</td>
+        <td>".$row['dsc']."</td>
+        <td>Action</td>
+    </tr>";
+        // echo "<br> NO is".$row['sno'].".Title is".$row['title']." Description is".$row['dsc'].$row['dt'];
+        // echo "<br>";
+    }
 
     ?>
+
+                
+
+            </tbody>
+        </table>
+
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
